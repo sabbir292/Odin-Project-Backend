@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/57baf78acb.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="index.css">
+    <title>Library</title>
+</head>
+<body>
+    <main class="main">
+        <div class="add-book">
+            <button class="addBtn btn">+ Add Book</button>
+        </div>
+        <div class="modal">
+            <form class="form" action="">
+                <span class="cross"><i class="fa-solid fa-xmark"></i></span>
+                <lebel for="title">
+                    Title
+                </lebel>
+                    <input id="title" name="title" type="text">
+                <lebel for="author">
+                    Author
+                </lebel>
+                    <input id="author" name="author" type="text">
+                <lebel for="pages">
+                    Pages
+                </lebel>
+                    <input id="pages" name="pages" type="number">
+                <lebel for="isread">
+                    Have you read this book?
+                    <input id="isread" name="isread" type="checkbox">
+                </lebel>
+                <button class="submitBtn btn">Submit</button>
+            </form>
+        </div>
+
+        <div class="booklist">
+            <!-- <div class="book">
+                <p class="title">Dummy Title</p>
+                <p class="author">Author</p>
+                <p class="pages">Pages</p>
+                <div class="bookBtns">
+                    <button class="isreadBtn btn">Read</button>
+                    <button class="removeBtn btn">Remove</button>
+                </div>
+            </div> -->
+        </div>
+    </main>    
+
+    <script src="index.js"></script>
+</body>
+</html>

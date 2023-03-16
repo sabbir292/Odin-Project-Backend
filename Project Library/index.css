@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Karla:wght@300;400;500;600;700;800&family=Poor+Story&family=Poppins:wght@300;400;500;600;700&family=Ubuntu:wght@300;400;500;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.main{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal{
+    position: absolute;
+    top: 3rem;
+    background-color: bisque;
+    margin: 2rem 1rem;
+    padding: 1rem;
+    border-radius: .8rem;
+    display: none;
+}
+
+.modal.show{
+    display: block;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.cross{
+    position: absolute;
+    right: 1.1rem;
+}
+
+input{
+    height: 1.4rem;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    padding: 4px 10px;
+    background-color: rgb(78, 77, 77);
+    color: white;
+}
+
+.isread{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn{
+    height: 2rem;
+    width: 6rem;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    font-weight: 600;
+}
+.addBtn{
+    background: #383737;
+    color: white;
+    margin: 1rem;
+}
+.submitBtn{
+    margin: 0 auto;
+}
+
+.booklist{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    padding: 1rem;
+    flex-wrap: wrap;
+}
+.book{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    background-color: aliceblue;
+    padding: 1rem;
+    margin: 1rem;
+    min-width: 15rem;
+    min-height: 12rem;
+    border-radius: 1rem;
+}
+.isreadBtn{
+    width: 12rem;
+    background-color: rgb(165, 240, 165);
+}
+.notRead{
+    background-color: #9e2f4b;
+}
+
+.removeBtn{
+    width: 12rem;
+}
+
+.bookBtns{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}

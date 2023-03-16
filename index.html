@@ -1,0 +1,250 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-Objext OP</title>
+</head>
+<body>
+    <h1>hello world</h1>
+
+    <script>
+
+       function Books(title,author,pages,isRead){
+            this.title = title
+            this.author = author
+            this.pages = pages
+            this.isRead = isRead
+            this.info = ()=>{
+                return `${title} by ${author}, ${pages} pages, ${isRead}`
+            }
+        }
+
+        const theHobbit = new books('The Hobbit', 'J.R.R Tolkien', 295, 'Not Read Yet')
+        console.log(theHobbit.info())
+
+
+        // ProType:-----
+
+        let x = {} //same as let x = new Object()
+        // console.log(x)
+        // console.log(Object.getPrototypeOf(x))
+
+        let y = []
+        // console.log(y.__proto__)
+      
+        //constructor function
+        // Initialize a constructor function for a new Hero
+
+       function Hero(name,level){
+            this.name = name
+            this.level = level
+        }
+
+        let hero1 = new Hero('Xman', 1)
+        console.log(hero1)
+        console.log(Object.getPrototypeOf(hero1))
+
+
+
+
+
+        //add methods
+        Hero.prototype.greet = function(){
+            return `${this.name} says Hello!`
+        }
+
+        function Warrior(name,level,weapon){
+            //chaining and copying the properties of hero with call method
+
+            Hero.call(this,name,level) //** The call method is links the method and properties of constructos automatically.  TO do that we have to use Object.setPortypeOf() method.
+
+            // Add new property
+            this.weapon = weapon
+        }
+
+        function Healer(name,level,spell){
+            Hero.call(this,name,level)
+            this.spell = spell
+        }
+
+        Warrior.prototype.attack = function(){
+            return `${this.name} attacks with the ${this.weapon}`
+        }
+
+        Healer.prototype.Heal = function(){
+            return `${this.name} casts ${this.spell}`
+        }
+
+        const hero2 = new Warrior('Naruto',1,'RasinGun')
+        const hero3 = new Healer('Rafaela',1,'Healing prayer for everyOne')
+
+        console.log(hero2.attack())
+        console.log(hero3.Heal())
+        // console.log(hero2.greet()) ** The call method is links the method and properties of constructos automatically.  TO do that we have to use Object.setPortypeOf() method.  Also we should use this method before adding any method to constructor.
+
+        // **Re-factored Code:--
+
+        function Heroes(name,level){
+            this.name = name
+            this.level = level
+        }
+
+        function Fighter(name,level,wepon){
+            Heroes.call(this,name,level)
+            this.weapon = wepon
+        }
+
+        function Mage(name,level,spell){
+            Heroes.call(this,name,level)
+            this.spell = spell
+        }
+
+        // link prototypes and prototypes Methods
+
+        Object.setPrototypeOf(Warrior.prototype, Heroes.prototype)
+        Object.setPrototypeOf(Mage.prototype, Heroes.prototype)
+
+        //add methods
+
+        Heroes.prototype.greeting = function(){
+            return `${this.name} says Hello!`
+        }
+        Fighter.prototype.fight = function(){
+            return `${this.name} attack with the ${this.weapon}`
+        }
+        Mage.prototype.casts = function(){
+            return `${this.name} casted ${this.spell}`
+        }
+
+         
+        // Protypical inheritence
+
+        // let animal = {
+        //     eats:true
+        // }
+        // let rabit = {
+        //     jumps : true
+        // }
+
+        // rabit.__proto__= animal;
+        // console.log(rabit.jumps)
+
+        // long prototypical inheritence
+
+//         let animal = {
+//   eats: true,
+//   walk() {
+//     alert("Animal walk");
+//   }
+// };
+
+// let rabbit = {
+//   jumps: true,
+//   __proto__: animal
+// };
+
+// let longEar = {
+//   earLength: 10,
+//   __proto__: rabbit
+// };
+
+// // walk is taken from the prototype chain
+// longEar.walk(); // Animal walk
+// console.log(longEar.jumps , longEar.eats); // true (from rabbit)
+
+//Ex-1
+let animal = {
+  jumps: null
+};
+let rabbit = {
+  __proto__: animal,
+  jumps: true
+};
+
+alert( rabbit.jumps ); // ? (1) true
+
+delete rabbit.jumps;
+
+alert( rabbit.jumps ); // ? (2) null
+
+delete animal.jumps;
+
+alert( rabbit.jumps ); // ? (3) undefined
+
+//Ex:2
+
+let head = {
+  glasses: 1
+};
+
+let table = {
+  pen: 3,
+  __proto__:head
+};
+
+let bed = {
+  sheet: 1,
+  pillow: 2,
+  __proto__: table
+};
+
+let pockets = {
+  money: 2000,
+  __proto__: bed
+};
+
+console.log(pockets.pen, bed.glasses)
+
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>New Book Form</title>
+</head>
+<body>
+	<form id="bookForm" onsubmit="createBook(); return false;">
+		<label for="title">Title:</label>
+		<input type="text" id="title" name="title" required><br><br>
+
+		<label for="author">Author:</label>
+		<input type="text" id="author" name="author" required><br><br>
+
+		<label for="pages">Pages:</label>
+		<input type="number" id="pages" name="pages" required><br><br>
+
+		<label for="isread">Read?</label>
+		<input type="checkbox" id="isread" name="isread"><br><br>
+
+		<input type="submit" value="Add Book">
+	</form>
+
+	<script>
+		function Book(title, author, pages, isread) {
+			this.title = title;
+			this.author = author;
+			this.pages = pages;
+			this.isread = isread;
+		}
+
+		function createBook() {
+			// Get the values from the form
+			const title = document.getElementById('title').value;
+			const author = document.getElementById('author').value;
+			const pages = document.getElementById('pages').value;
+			const isread = document.getElementById('isread').checked;
+
+			// Create a new book object using the constructor
+			const newBook = new Book(title, author, pages, isread);
+
+			// Do something with the new book object (e.g. add it to a list, display it on the page, etc.)
+			console.log(newBook);
+		}
+	</script>
+</body>
+</html>
