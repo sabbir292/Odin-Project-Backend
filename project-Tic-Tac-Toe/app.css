@@ -1,0 +1,98 @@
+:root{
+    --border-color: rgb(4, 53, 56);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+}
+.title,.footer{
+    background-color: rgb(26, 22, 22);
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.title{
+    color: rgb(233, 216, 216);
+    font-size: 10rem;
+}
+.footer{
+    height: 3rem;
+    color: white;
+}
+.messages{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    font-size: 2rem;
+}
+.board{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 0rem;
+}
+.cells{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    border: 1px solid grey;
+    height: 10rem;
+    width: 10rem;
+}
+
+.board0{
+    border-bottom: 4px solid var(--border-color);
+    border-right: 4px solid var(--border-color);
+    border-top: transparent;
+    border-left: transparent;
+}
+.board1{
+    border-top: transparent;
+    border-bottom: 4px solid var(--border-color);
+    border-right: 4px solid var(--border-color);
+}
+.board2{
+    border-top: transparent;
+    border-right: transparent;
+    border-bottom: 4px solid var(--border-color);
+}
+.board3{
+    border-left: transparent;
+    border-bottom: 4px solid var(--border-color);
+    border-right: 4px solid var(--border-color);
+}
+.board4{
+    border-bottom: 4px solid var(--border-color);
+    border-right: 4px solid var(--border-color);
+}
+.board5{
+    border-right: transparent;
+    border-bottom: 4px solid var(--border-color);
+}
+.board6{
+    border-left: transparent;
+    border-bottom: transparent;
+    border-right: 4px solid var(--border-color);
+}
+.board7{
+    border-bottom: transparent;
+    border-right: 4px solid var(--border-color);
+}
+.board8{
+    border-right: transparent;
+    border-bottom: transparent;
+    
+}
