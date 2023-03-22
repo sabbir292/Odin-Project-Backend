@@ -1,142 +1,112 @@
 const GameBoard = (()=>{
-    const gameboard = ['','','','','','','','','']
-    // console.log(document)
-    const board = document.querySelector('.board')
-    const reset = document.querySelector('.reset')
+    const gamebord = ["","","","","","","","","",]
 
-        const boards = gameboard.map((item,index)=>{
-            return `<div class='cells board${index}' data-id='${index}'>${item}</div>`
-        })
-        const newBoards = boards.join('')
-        board.innerHTML = newBoards
-    
-    const cells = document.querySelectorAll('.cells')
-    reset.addEventListener('click',()=>{
-        console.log('playing')
+    const board = document.querySelector('.board')
+    console.log(board)
+    const cell = gamebord.map((item,index)=>{
+        return `<div class= 'cells board${index}' data-id = ${index}>${item}</div>`
     })
-    return {cells,gameboard,}
-   
+    const newBoard = cell.join('')
+    board.innerHTML = newBoard
+    const cells = document.querySelectorAll('.cells')
+    return {cells,gamebord}
 })();
 
 
-const Players = ()=>{
-   const playerX = 'x' 
-   const playerO = 'o'  
-   return {playerO,playerX}
+const Player = ()=>{
+    const playerX = 'x'
+    const playerO = 'o'
+
+    let activeplayer = playerX
+    const switchPlayerTurn = ()=>{
+        activeplayer = activeplayer === playerX? playerO : playerX
+    }
+    const getActivePlayer = ()=> activeplayer
+    console.log(getActivePlayer())
+    return {playerO,playerX,getActivePlayer,activeplayer,switchPlayerTurn}
 }
-Players()
 
+const getWinner = (gamebord)=>{
+    const array = [
+        [gamebord[0],gamebord[1], gamebord[2]],
+        [gamebord[3],gamebord[4], gamebord[5]],
+        [gamebord[6],gamebord[7], gamebord[8]],
 
-const getWinner =(gameboard)=>{
-    const winingFormula = [
-        [gameboard[0],gameboard[1],gameboard[2]],
-        [gameboard[3],gameboard[4],gameboard[5]],
-        [gameboard[6],gameboard[7],gameboard[8]],
+        [gamebord[0],gamebord[3], gamebord[6]],
+        [gamebord[1],gamebord[4], gamebord[7]],
+        [gamebord[2],gamebord[5], gamebord[8]],
 
-        [gameboard[0],gameboard[3],gameboard[6]],
-        [gameboard[1],gameboard[4],gameboard[7]],
-        [gameboard[2],gameboard[5],gameboard[8]],
-
-        [gameboard[0],gameboard[4],gameboard[8]],
-        [gameboard[2],gameboard[4],gameboard[6]],
+        [gamebord[0],gamebord[4], gamebord[8]],
+        [gamebord[2],gamebord[4], gamebord[6]],
     ]
+    for (let i = 0; i<array.length; i++){
+        const [a,b,c]= array[i]
 
-    for (i=0; i<winingFormula.length; i++){
-        const [a,b,c]= winingFormula[i]
-        if( a && a === b && b === c){
-            return `the winner is ${a}`
-        }else if(gameboard.every(cell=> cell!=="") && a!==b && b!==c){
-            return `It's a Tie`
+        if(a && a===b && b===c){
+            return `The winner is ${a}`
+            // console.log(`The winner is ${a}`)
         }
     }
 
+    if(gamebord.every(cell=> cell!=='')){
+        // console.log(`It's a tie`)
+        return `It's a Tie`
+    }
 }
 
-const setActivePlayer = (currentPlayer) => {
-    const { playerO, playerX } = Players();
-    let activePlayer = currentPlayer;
+const playGame =(()=>{
+    const {cells,gamebord}= GameBoard
+    let {playerO,playerX,getActivePlayer,activeplayer,switchPlayerTurn}= Player()
+    // console.log({cells,gamebord,playerO,playerX})
+   
+    const messages = document.querySelector('.messages')
 
-    if (activePlayer === playerX) {
-        activePlayer = playerO;
-    } else if (activePlayer === playerO) {
-        activePlayer = playerX;
-    }
-    // console.log(activePlayer)
-    return { activePlayer };
+    const addMarker = (e)=>{
+       const value = e.target.textContent
+       const index = e.target.dataset.id
+    //    console.log({value,index})
 
-};
-
-// const setActivePlayer = ()=>{
-//     const {playerO,playerX}= Players()
-//     let activePlayer = playerX
-//         if(activePlayer === playerX) activePlayer = playerX
-//         else if(activePlayer === playerO) activePlayer = playerO
-//     return {activePlayer}
-// }
-
-
-
-const PlayGame = ()=>{
-    const {playerO,playerX}= Players()
-    const {cells,gameboard} = GameBoard
-    let {activePlayer}= setActivePlayer(playerX)
-
-
-    const addMarker = (e) => {
-    const index = e.target.dataset.id;
-    const value = e.target.textContent;
-     const messages = document.querySelector('.messages')
-
-    if (activePlayer === playerX && !value && !getWinner(gameboard)) {
-        gameboard.splice(index, 1, activePlayer);
-        e.target.innerText = activePlayer;
-        ({ activePlayer } = setActivePlayer(playerX));
-        // messages.textContent = `Player ${activePlayer}'s turn`
-    } else if (activePlayer === playerO && !value && !getWinner(gameboard)) {
-        gameboard.splice(index, 1, activePlayer);
-        e.target.innerText = activePlayer;
-        ({ activePlayer } = setActivePlayer(playerO));
-        // messages.textContent = `Player ${activePlayer}'s turn`
-        console.log(activePlayer)
+       if(!value && !getWinner(gamebord)){
+        gamebord.splice(index,1,getActivePlayer())
+        e.target.textContent = getActivePlayer()
+        activeplayer = playerX
+        switchPlayerTurn()
+       }
+       else if(!value && !getWinner(gamebord)){
+        gamebord.splice(index,1,getActivePlayer())
+        e.target.textContent = getActivePlayer()
+        activeplayer = playerO
+        switchPlayerTurn()
+       }
+       
+    //    getWinner(gamebord)
+       
+       
+       if(getWinner(gamebord)){
+            messages.textContent = getWinner(gamebord)
+       }else{
+        messages.textContent = `Player ${getActivePlayer()}'s turn`
+       }
+    //    Player()
     }
 
-    getWinner(gameboard);
+    const resetGame = () => {
+    
+        GameBoard.gamebord.fill('')
+        GameBoard.cells.forEach(cell => {
+          cell.textContent = ''
+        })
+        messages.textContent = `Player ${Player().getActivePlayer()}'s turn`
+      }
+      
+      const reset = document.querySelector('.reset')
+      reset.addEventListener('click', resetGame)
 
-    if(getWinner(gameboard)){
-        messages.textContent = getWinner(gameboard)
-    }else if(activePlayer){
-        messages.textContent = `Player ${activePlayer}'s Turn`
-    }
-    // showMessage();
-};
-//         const addMarker=(e)=>{
-//             const index = e.target.dataset.id
-//             const value = e.target.textContent
 
-//             if(activePlayer === playerX && !value && !getWinner(gameboard)){
-//                 gameboard.splice(index,1,activePlayer)
-//                 // console.log(playerX,gameboard)
-//                 e.target.innerText = activePlayer
-//                 activePlayer = playerO
-//                 setActivePlayer()
-//                 console.log(getWinner)
-//             }else if(activePlayer === playerO && !value && !getWinner(gameboard)){
-//                 gameboard.splice(index,1,activePlayer)
-//                 e.target.innerText = activePlayer
-//                 // console.log(playerO,gameboard)
-//                 activePlayer = playerX
-//                 setActivePlayer()
-//                 console.log(getWinner)
-//             }
-// getWinner(gameboard)
-// showMessage()
-//         }
-        cells.forEach(item=>{
-        item.addEventListener('click',addMarker)
+    cells.forEach(cell=>{
+        cell.addEventListener('click',addMarker)
     })
-}
-
-PlayGame()
-
+})();
+// playGame()
 
 
