@@ -102,8 +102,9 @@ input{
 .isreadBtn{
     width: 12rem;
     background-color: rgb(165, 240, 165);
+
 }
-.notRead{
+.isreadBtn.notRead{
     background-color: #9e2f4b;
 }
 
